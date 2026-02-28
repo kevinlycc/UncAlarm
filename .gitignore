@@ -1,0 +1,4 @@
+node_modules/
+__pycache__/
+*.pyc
+dashboard/node_modules/

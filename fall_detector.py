@@ -89,7 +89,6 @@ class FallDetector:
 
         angle = self.get_body_angle(keypoints)
         angle_str = f"{angle:.1f}" if angle is not None else "None"
-        print(f"[FallDetector] aspect={aspect_ratio:.2f} body_w={body_width:.0f} body_h={body_height:.0f} angle={angle_str}")
 
         if self.fall_confirmed:
             # Reset when person is upright again (tall and narrow)
