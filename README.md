@@ -54,6 +54,6 @@ Emergency Escalation
 | Name        | Role            | GitHub / Identifier |
 |-------------|-----------------|---------------------|
 | Adam Le     | Software        | adamvl7             |
-| Kevin Chhim | Software        | kevinlycc           |
+| Kevin Chhim | Embedded        | kevinlycc           |
 | Ryan Ong    | Project Manager | riannongg           |
-| Sam Phan    | Hardware        | blayyd              |
+| Sam Phan    | Tech Ops        | blayyd              |
