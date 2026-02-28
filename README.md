@@ -41,10 +41,12 @@ Emergency Escalation
 4. Inactivity Emergency Contact
    - Sends a notification after total inactivity.
    - Emergency services -> circle members then emergency services.
-5. Implement Camera Movement
+5. Print Camera Housing
+   - Print housing for cameras and servos.
+6. Implement Camera Movement
    - Camera movement tracks user.
    - Horizontal tracking -> horizontal and vertical tracking.
-6. Implement Circle Member Viewing
+7. Implement Circle Member Viewing
    - UI for circle members to see, proceed with, and cancel contact.
    - Display options to proceed/cancel emergency services -> display video clip of fall and options to proceed/cancel.
 
