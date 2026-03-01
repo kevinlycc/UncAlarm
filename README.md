@@ -98,20 +98,10 @@ Family members receive push notifications and can view a live feed through a Pro
 - Connection status indicator
 
 ## Quick Start
-
-```bash
-# Clone the repo
-git clone https://github.com/kevinlycc/UnderWatch.git
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Configure your ntfy topic
-# Edit config.py and set NTFY_TOPIC
-
-# Run
-python main.py
-```
+1. Download repo as .zip file
+2. Connect to Arduino Uno Q with network mode
+3. Attach USB dongle and USB webcam
+4. Import .zip as App Lab project into Arduino App Lab
 
 ## Timeline
 
