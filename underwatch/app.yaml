@@ -1,0 +1,9 @@
+name: UnderWatch v4 (video image class)
+description: This example showcases fall detection using the video image classification brick. It uses a pre-trained model from edge impulse, which is trained to detect falls in video frames. The web UI brick is used to display the results of the classification in real-time.
+ports: []
+bricks:
+- arduino:video_image_classification:
+    variables:
+      EI_CLASSIFICATION_MODEL: /home/arduino/.arduino-bricks/ei-models/fall-detection-linux-aarch64-v20.eim
+- arduino:web_ui: {}
+icon: 🚶‍♂️
