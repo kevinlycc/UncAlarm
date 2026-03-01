@@ -130,8 +130,13 @@ python main.py
 | Adam Le | Software | [@adamvl7](https://github.com/adamvl7) |
 | Kevin Chhim | Embedded | [@kevinlycc](https://github.com/kevinlycc) |
 | Ryan Ong | Project Manager | [@riannongg](https://github.com/riannongg) |
-| Sam Phan | Tech Ops | [@blayyd](https://github.com/blayyd) |
+| Samuel Phan | Machine Learning & Systems | [@blayyd](https://github.com/blayyd) |
+
+## Useful References
+- https://docs.edgeimpulse.com/hardware/deployments/run-arduino-app-lab
+- https://docs.arduino.cc/hardware/uno-q/
+- https://github.com/arduino/app-bricks-py
 
 <p align="center">
-  Built with blood, sweat, and tears ❤️ at UCI IrvineHacks 2026
+  Built with love ❤️ at UCI IrvineHacks 2026
 </p>
