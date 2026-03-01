@@ -1,4 +1,4 @@
-# UnderWatch
+# 👁️ UnderWatch
 
 ## Table of Contents
 - [About](#about)
@@ -7,8 +7,22 @@
 - [Collaborators](#collaborators)
 
 ## About
-A privacy first, AI powered elderly monitoring system that detects falls in real time and sends alerts through layered human verification before contacting emergency services.
+**Privacy-first, edge-AI elderly monitoring system that detects falls in real time.**
+
 Built for the Arduino UNO Q — all processing happens on-device, no cloud required.
+
+---
+
+## ✨ Features
+
+- 🎯 **Real-time fall detection** — MediaPipe pose estimation running locally
+- 🔒 **Privacy first** — Video never leaves the device
+- 📹 **Camera tracking** — Pan/tilt servos follow the person
+- ⏱️ **Smart escalation** — Layered verification before contacting emergency services
+- 📱 **Live monitoring** — Family can view feed via local PWA
+- 🔔 **Push notifications** — Alerts via ntfy.sh (no app needed)
+
+---
 
 ## System Architecture
 Infrared Camera
@@ -83,10 +97,17 @@ Family members receive push notifications and can view a live feed through a Pro
    - UI for circle members to see, proceed with, and cancel contact.
    - Display options to proceed/cancel emergency services -> display video clip of fall and options to proceed/cancel.
 
-## Collaborators
+## 👥 Collaborators
 | Name        | Role            | GitHub / Identifier |
 |-------------|-----------------|---------------------|
 | Adam Le     | Software        | adamvl7             |
 | Kevin Chhim | Embedded        | kevinlycc           |
 | Ryan Ong    | Project Manager | riannongg           |
 | Sam Phan    | Tech Ops        | blayyd              |
+
+---
+
+<p align="center">
+  Built with ❤️ at UCI IrvineHacks 2026
+</p>
+
