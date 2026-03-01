@@ -133,5 +133,5 @@ python main.py
 | Sam Phan | Tech Ops | [@blayyd](https://github.com/blayyd) |
 
 <p align="center">
-  Built with ❤️ at UCI IrvineHacks 2026
+  Built with blood, sweat, and tears ❤️ at UCI IrvineHacks 2026
 </p>
