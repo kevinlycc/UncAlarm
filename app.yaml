@@ -1,0 +1,11 @@
+name: UnderWatch v4 (video image class)
+description: This example showcases person classification on camera, using a camera stream from USB camera
+ports: []
+bricks:
+- arduino:video_image_classification: {
+    variables: {
+      EI_CLASSIFICATION_MODEL: /home/arduino/.arduino-bricks/ei-models/fall-detection-linux-aarch64-v15.eim
+    }
+}
+- arduino:web_ui: {}
+icon: 🚶‍♂️
