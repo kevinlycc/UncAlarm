@@ -1,0 +1,115 @@
+<!--
+SPDX-FileCopyrightText: Copyright (C) ARDUINO SRL (http://www.arduino.cc)
+SPDX-License-Identifier: MPL-2.0
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GuardianEye</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+
+    <!-- FULLSCREEN VIDEO WRAP -->
+    <div id="videoWrap">
+        <div id="videoPlaceholder">
+            <div class="placeholder-icon">📷</div>
+            <p>Searching for camera...</p>
+        </div>
+        <iframe id="dynamicIframe" title="Video stream" frameBorder="0" style="display:none;"></iframe>
+
+        <!-- CORNER BRACKETS -->
+        <div class="corner top-left"     id="cornerTL"></div>
+        <div class="corner top-right"    id="cornerTR"></div>
+        <div class="corner bottom-left"  id="cornerBL"></div>
+        <div class="corner bottom-right" id="cornerBR"></div>
+
+        <!-- TOP-LEFT HUD -->
+        <div class="hud-logo">
+            <div class="logo-badge">U</div>
+            <span class="logo-text">UnderWatch</span>
+            <div class="live-pill">
+                <div class="live-dot"></div>
+                <span>LIVE</span>
+            </div>
+        </div>
+
+        <!-- TOP-RIGHT HUD -->
+        <div class="hud-top-right">
+            <div id="fallCountBadge" class="fall-count-badge" style="display:none;"></div>
+            <button class="log-btn" id="logToggle">Event Log</button>
+        </div>
+
+        <!-- SERVO CONTROL PAD -->
+        <div class="servo-pad" id="servoPad">
+            <div class="servo-row">
+                <div class="servo-spacer"></div>
+                <button class="servo-btn" id="btnUp" title="Tilt Up">▲</button>
+                <div class="servo-spacer"></div>
+            </div>
+            <div class="servo-row">
+                <button class="servo-btn" id="btnLeft"  title="Pan Left">◀</button>
+                <button class="servo-btn servo-center-btn" id="btnCenter" title="Center">●</button>
+                <button class="servo-btn" id="btnRight" title="Pan Right">▶</button>
+            </div>
+            <div class="servo-row">
+                <div class="servo-spacer"></div>
+                <button class="servo-btn" id="btnDown" title="Tilt Down">▼</button>
+                <div class="servo-spacer"></div>
+            </div>
+            <div class="servo-label">CAM CONTROL</div>
+        </div>
+
+        <!-- COUNTDOWN STRIP -->
+        <div class="countdown-bar" id="countdownBar" style="display:none;">
+            <div class="countdown-inner">
+                <span class="countdown-msg" id="countdownMsg">Calling emergency services in</span>
+                <span class="countdown-num" id="countdownNum">30s</span>
+            </div>
+            <div class="countdown-track">
+                <div class="countdown-fill" id="countdownFill" style="width:100%;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE-IN EVENT LOG -->
+    <div class="log-panel" id="logPanel">
+        <div class="log-header">EVENT LOG</div>
+        <div class="log-body" id="logBody">
+            <div class="log-empty">No events yet</div>
+        </div>
+        <div class="log-footer">IrvineHacks 2026 · GuardianEye</div>
+    </div>
+
+    <!-- FALL ALERT MODAL -->
+    <div id="alertOverlay" class="alert-overlay">
+        <div class="alert-modal">
+            <div class="alert-icon" id="alertIcon">⚠️</div>
+            <h2 id="alertTitle">Fall Detected</h2>
+            <p id="alertDescription">A potential fall has been detected.</p>
+            <div id="alertTimer" class="alert-timer">30</div>
+            <div class="alert-actions">
+                <button id="dismissButton" class="btn-dismiss">I AM OKAY</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="error-container" class="error-toast" style="display:none;"></div>
+
+    <script>
+        const iframe      = document.getElementById('dynamicIframe');
+        const placeholder = document.getElementById('videoPlaceholder');
+        const streamUrl   = `http://${window.location.hostname}:4912/embed`;
+        let iv = setInterval(() => { iframe.src = streamUrl; }, 1000);
+        iframe.onload = () => {
+            clearInterval(iv);
+            placeholder.style.display = 'none';
+            iframe.style.display = 'block';
+        };
+    </script>
+    <script src="libs/socket.io.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
