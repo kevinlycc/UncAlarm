@@ -1,0 +1,4 @@
+sketch:
+  name: underwatch_mcu
+  board: arduino_uno_q
+  fqbn: arduino:stm32:uno_q
