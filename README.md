@@ -1,45 +1,72 @@
-# 👁️ UnderWatch
+# UnderWatch
 
-## Table of Contents
-- [About](#about)
-- [System Architecture](#system-architecture)
-- [Timeline](#timeline)
-- [Collaborators](#collaborators)
-
-## About
 **Privacy-first, edge-AI elderly monitoring system that detects falls in real time.**
 
 Built for the Arduino UNO Q — all processing happens on-device, no cloud required.
 
----
+## Features
 
-## ✨ Features
-
-- 🎯 **Real-time fall detection** — MediaPipe pose estimation running locally
-- 🔒 **Privacy first** — Video never leaves the device
-- 📹 **Camera tracking** — Pan/tilt servos follow the person
-- ⏱️ **Smart escalation** — Layered verification before contacting emergency services
-- 📱 **Live monitoring** — Family can view feed via local PWA
-- 🔔 **Push notifications** — Alerts via ntfy.sh (no app needed)
-
----
+- **Real-time fall detection** — MediaPipe pose estimation running locally
+- **Privacy first** — Video never leaves the device
+- **Camera tracking** — Pan/tilt servos follow the person
+- **Smart escalation** — Layered verification before contacting emergency services
+- **Live monitoring** — Family can view feed via local PWA
+- **Push notifications** — Alerts via ntfy.sh (no app needed)
 
 ## System Architecture
-Infrared Camera
-      ->
-Fall Detection
-      ->
-Confidence Scoring
-      ->
-Decision State Machine
-      ->
-User Notification
-      ->
-Circle Notification
-      ->
-Emergency Escalation
 
-## 🔐 Privacy Priorities
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                       ARDUINO UNO Q                             │
+│  ┌──────────────────────────────┐  ┌─────────────────────────┐  │
+│  │   Qualcomm QRB2210 (Linux)   │  │   STM32U585 (MCU)       │  │
+│  │                              │  │                         │  │
+│  │   • MediaPipe Pose           │  │   • Servo control       │  │
+│  │   • Fall detection           │◄─►   • Buzzer alerts       │  │
+│  │   • Web server               │  │   • Button input        │  │
+│  │   • Notifications            │  │   • LED status          │  │
+│  └──────────────────────────────┘  └─────────────────────────┘  │
+└─────────────────────────────────────────────────────────────────┘
+         │                                       │
+         ▼                                       ▼
+    USB Camera                           Physical Controls
+   (Logitech Brio)                    (Button, Buzzer, Servos)
+```
+
+## Alert Flow
+
+```
+         Person Falls
+              │
+              ▼
+    ┌─────────────────────┐
+    │   COUNTDOWN #1      │ ◄─── Buzzer beeping
+    │   (30 seconds)      │      LED flashing
+    └─────────┬───────────┘
+              │
+    ┌─────────┴─────────┐
+    │                   │
+[BUTTON]            (timeout)
+    │                   │
+    ▼                   ▼
+ DISMISS ✓      Family Notified
+                        │
+              ┌─────────┴─────────┐
+              │                   │
+    ┌─────────▼─────────┐         │
+    │   COUNTDOWN #2    │    [APP DISMISS]
+    │   (60 seconds)    │         │
+    │   • +30s if       │         │
+    │     person stands │         ▼
+    └─────────┬─────────┘      DISMISS ✓
+              │
+           (timeout)
+              │
+              ▼
+      Emergency Services
+```
+
+## Privacy Priorities
 
 | Principle | Implementation |
 |-----------|----------------|
@@ -50,9 +77,7 @@ Emergency Escalation
 | **No Cloud Processing** | All AI runs on-device via edge computing |
 | **Local Network Streaming** | Live feed only accessible on home WiFi |
 
----
-
-## 🛠️ Hardware
+## Hardware
 
 | Component | Purpose |
 |-----------|---------|
@@ -62,9 +87,7 @@ Emergency Escalation
 | Push Button | "I'm OK" dismiss |
 | Piezo Buzzer | Audio alerts |
 
----
-
-## 📱 Family Interface
+## Family Interface
 
 Family members receive push notifications and can view a live feed through a Progressive Web App (PWA) on their phone — no app store download required.
 
@@ -74,40 +97,41 @@ Family members receive push notifications and can view a live feed through a Pro
 - One-tap emergency call
 - Connection status indicator
 
----
+## Quick Start
 
+```bash
+# Clone the repo
+git clone https://github.com/kevinlycc/UnderWatch.git
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Configure your ntfy topic
+# Edit config.py and set NTFY_TOPIC
+
+# Run
+python main.py
+```
 
 ## Timeline
-1. Camera Fall Detection
-   - AI detects if user has fallen/not fallen.
-2. Fall Detection Signal
-   - Sends a notification when a fall occurs.
-   - Printed words -> lights -> lights and sounds.
-3. Signal Off Button
-   - A button that resets the program.
-4. Inactivity Emergency Contact
-   - Sends a notification after total inactivity.
-   - Emergency services -> circle members then emergency services.
-5. Print Camera Housing
-   - Print housing for cameras and servos.
-6. Implement Camera Movement
-   - Camera movement tracks user.
-   - Horizontal tracking -> horizontal and vertical tracking.
-7. Implement Circle Member Viewing
-   - UI for circle members to see, proceed with, and cancel contact.
-   - Display options to proceed/cancel emergency services -> display video clip of fall and options to proceed/cancel.
 
-## 👥 Collaborators
-| Name        | Role            | GitHub / Identifier |
-|-------------|-----------------|---------------------|
-| Adam Le     | Software        | adamvl7             |
-| Kevin Chhim | Embedded        | kevinlycc           |
-| Ryan Ong    | Project Manager | riannongg           |
-| Sam Phan    | Tech Ops        | blayyd              |
+- [x] Camera fall detection with AI
+- [x] Fall detection signal (buzzer + LED)
+- [x] Signal off button
+- [x] Inactivity emergency contact escalation
+- [x] Camera movement tracking (pan/tilt)
+- [ ] Print camera housing
+- [ ] Circle member viewing UI with video playback
 
----
+## Team
+
+| Name | Role | GitHub |
+|------|------|--------|
+| Adam Le | Software | [@adamvl7](https://github.com/adamvl7) |
+| Kevin Chhim | Embedded | [@kevinlycc](https://github.com/kevinlycc) |
+| Ryan Ong | Project Manager | [@riannongg](https://github.com/riannongg) |
+| Sam Phan | Tech Ops | [@blayyd](https://github.com/blayyd) |
 
 <p align="center">
   Built with ❤️ at UCI IrvineHacks 2026
 </p>
-
